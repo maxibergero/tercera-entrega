@@ -6,30 +6,28 @@ const titulo = document.querySelector('#titulo')
 const Usuario = document.querySelectorAll('.cardProducto')
 
 
-//click sobre el boton ingresar
-ingresar.onsubmit = (e) => {
+
+
+
+formulario.onsubmit = (e) => {
     e.preventDefault()
     const infoUsuario = {
-        nombre: inputNombre.value,
-        apellido: inputApellido.value,
+      nombre: inputNombre.value,
+      apellido: inputApellido.value,
     }
-
-
-
     localStorage.setItem('infoUsuario', JSON.stringify(infoUsuario))
-    ingresar.remove()
-
-
-}
-
-// mirar si en storage existe infoUsuario
-//const infoUsuario = JSON.parse(localStorage.getItem('infoUsuario'))
-const infoUsuario = localStorage.getItem('infoUsuario')
-const infoUsuarioJS = JSON.parse(infoUsuario)
-if (infoUsuario) {
-
-    titulo.innerText = `Bienvenido confirma tu identidad`
-}
+    formulario.remove()
+    titulo.innerText = `Bienvenido ${infoUsuario.nombre} ${infoUsuario.apellido}`
+  }
+  
+  // mirar si en storage existe infoUsuario
+  //const infoUsuario = JSON.parse(localStorage.getItem('infoUsuario'))
+  const infoUsuario = localStorage.getItem('infoUsuario')
+  const infoUsuarioJS = JSON.parse(infoUsuario)
+  if (infoUsuario) {
+    formulario.remove()
+    titulo.innerText = `Bienvenido ${infoUsuarioJS.nombre} ${infoUsuarioJS.apellido}`
+  }
 
 class Transportista {
     constructor(id, nombre, apellido, dni) {
@@ -54,6 +52,7 @@ const transportistas = [
     new Transportista(10, 'luciano', 'muzo', 34581234)
 ];
 
+
 transportistas.forEach((t) => {
     Trans.innerHTML += `<div class="card cardProducto">
       <div class="card-body">
@@ -70,6 +69,7 @@ const botonesAgregar = document.querySelectorAll('.btn-primary');
 botonesAgregar.forEach((boton) => {
     boton.onclick = () => {
 
+        
         const transportistaSeleccionado = transportistas.find((prod) => prod.id === parseInt(boton.id));
 
         const prodCarrito = {
